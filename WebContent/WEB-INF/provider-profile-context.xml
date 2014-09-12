@@ -1,0 +1,654 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+    http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	
+	<bean id="dateFormat" class="java.text.SimpleDateFormat">
+		<constructor-arg value="yyyy-MM-dd HH:mm:ss" />
+	</bean>
+	
+	<bean id="abc_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="abc_provider_profile" />
+		<property name="providerCode" value="abc" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n Truyá»n thÃ´ng ABC" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n Truyá»n thÃ´ng ABC
+			</value>
+		</property>
+		<property name="paymentPolicy" value="15_1" />
+		<property name="tranferDate" value="17_n_0|4_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+								<entry key="2000000000" value="15.5" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+								<entry key="2000000000" value="15.5" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+								<entry key="2000000000" value="15.5" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+								<entry key="2000000000" value="15.5" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="ngan_luong_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="ngan_luong_provider_profile" />
+		<property name="providerCode" value="nganluong" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n NgÃ¢n lÆ°á»£ng" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n NgÃ¢n lÆ°á»£ng
+			</value>
+		</property>
+		<property name="paymentPolicy" value="15_1" />
+		<property name="tranferDate" value="17_n_0|4_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16.5" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="home_direct_1_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="home_direct_1_provider_profile" />
+		<property name="providerCode" value="home_direct_1" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect
+			</value>
+		</property>
+		<property name="paymentPolicy" value="15_1" />
+		<property name="tranferDate" value="17_n_0|4_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+								<entry key="4000000000" value="14.5" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+								<entry key="4000000000" value="14.5" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+								<entry key="4000000000" value="14.5" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+								<entry key="4000000000" value="14.5" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="home_direct_2_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="home_direct_2_provider_profile" />
+		<property name="providerCode" value="home_direct_2" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect
+			</value>
+		</property>
+		<property name="paymentPolicy" value="30_15" />
+		<property name="tranferDate" value="17_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="13.5" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="14" />
+								<entry key="4000000000" value="13.5" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="13.5" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="13.5" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="home_direct_3_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="home_direct_3_provider_profile" />
+		<property name="providerCode" value="home_direct_3" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect
+			</value>
+		</property>
+		<property name="paymentPolicy" value="15_1" />
+		<property name="tranferDate" value="17_n_0|4_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="17.5" />
+								<entry key="4000000000" value="17" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="17.5" />
+								<entry key="4000000000" value="17" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="17.5" />
+								<entry key="4000000000" value="17" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="17.5" />
+								<entry key="4000000000" value="17" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="false" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="home_direct_4_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="home_direct_4_provider_profile" />
+		<property name="providerCode" value="home_direct_4" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n dá»ch vá»¥ Homedirect
+			</value>
+		</property>
+		<property name="paymentPolicy" value="30_15" />
+		<property name="tranferDate" value="17_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16.5" />
+								<entry key="4000000000" value="16" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="16" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="false" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="fpt_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="fpt_provider_profile" />
+		<property name="providerCode" value="fpt" />
+		<property name="providerName" value="CÃ´ng ty cá» pháº§n GATE" />
+		<property name="providerDesc">
+			<value>
+				CÃ´ng ty cá» pháº§n GATE
+			</value>
+		</property>
+		<property name="paymentPolicy" value="30_15" />
+		<property name="tranferDate" value="17_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="14" />
+								<entry key="500000000" value="13.5" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15.5" />
+								<entry key="500000000" value="15" />
+								<entry key="2000000000" value="14.5" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="14" />
+								<entry key="500000000" value="13.5" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="15" />
+								<entry key="500000000" value="14.5" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="viettel_telecom_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="viettel_telecom_provider_profile" />
+		<property name="providerCode" value="viettel_telecom" />
+		<property name="providerName" value="Viettel Telecom Mwork(30+25)" />
+		<property name="providerDesc">
+			<value>
+				Mwork - Viettel Telecom
+			</value>
+		</property>
+		<property name="paymentPolicy" value="30_15" />
+		<property name="tranferDate" value="17_n_1|4_n_2" />
+		<property name="chargingRates">
+			<map>
+				<entry key="CARD">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="14" />
+								<entry key="10000000000" value="13.5" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="14" />
+								<entry key="10000000000" value="13.5" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="mwork_6x86_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="mwork_6x86_provider_profile" />
+		<property name="providerCode" value="6x86" />
+		<property name="providerName" value="MWork 6x86" />
+		<property name="providerDesc">
+			<value>
+				MWork 6x86
+			</value>
+		</property>
+		<property name="paymentPolicy" value="15_1" />
+		<property name="tranferDate" value="17_n_0|4_n_1" />
+		<property name="chargingRates">
+			<map>
+				<entry key="SMS">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>
+						<entry key="VNM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>
+						<entry key="BEL">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>
+						<entry key="SFE">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="10" />
+							</util:map>
+						</entry>	
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="mwork_8x38_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="mwork_8x38_provider_profile" />
+		<property name="providerCode" value="8x38" />
+		<property name="providerName" value="MWork 8x38" />
+		<property name="providerDesc">
+			<value>
+				MWork 8x38
+			</value>
+		</property>
+		<property name="paymentPolicy" value="30_15" />
+		<property name="tranferDate" value="4_n_3" />
+		<property name="chargingRates">
+			<map>
+				<entry key="SMS">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VNM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="BEL">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="SFE">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>	
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="mwork_iweb_provider_profile" class="vn.onepay.billing.model.ProviderProfile">
+		<property name="profileCode" value="mwork_iweb_provider_profile" />
+		<property name="providerCode" value="iweb" />
+		<property name="providerName" value="mWork IWeb" />
+		<property name="providerDesc">
+			<value>
+				mWork IWeb
+			</value>
+		</property>
+		<property name="paymentPolicy" value="30_15" />
+		<property name="tranferDate" value="4_n_3" />
+		<property name="chargingRates">
+			<map>
+				<entry key="WAP">
+					<util:map map-class="java.util.LinkedHashMap">
+						<entry key="DEFAULT">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VTM">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VMS">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+						<entry key="VNP">
+							<util:map map-class="java.util.LinkedHashMap">
+								<entry key="0" value="2" />
+							</util:map>
+						</entry>
+					</util:map>
+				</entry>
+			</map>
+		</property>
+		<property name="hasVat" value="true" />
+		<property name="status" value="1" />
+		<property name="enableDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2013-01-01 00:00:00" />
+			</bean>
+		</property>
+		<property name="expiredDate">
+			<bean factory-bean="dateFormat" factory-method="parse">
+				<constructor-arg value="2015-01-01 00:00:00" />
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="providerProfileManager"
+		class="vn.onepay.billing.service.impl.ProviderProfileManagerImpl">
+		<property name="profiles">
+			<list>
+				<ref bean="abc_provider_profile" />
+				<ref bean="ngan_luong_provider_profile" />
+				<ref bean="home_direct_1_provider_profile" />
+				<ref bean="home_direct_2_provider_profile" />
+				<ref bean="home_direct_3_provider_profile" />
+				<ref bean="home_direct_4_provider_profile" />
+				<ref bean="fpt_provider_profile" />
+				<ref bean="viettel_telecom_provider_profile" />
+				<ref bean="mwork_6x86_provider_profile" />
+				<ref bean="mwork_8x38_provider_profile" />
+				<ref bean="mwork_iweb_provider_profile" />
+			</list>
+		</property>
+	</bean>
+</beans>

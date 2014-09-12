@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+	<bean id="memCachedManager" class="vn.onepay.cache.memcached.MemCachedManager"
+		singleton="true">
+		 <constructor-arg value="123.30.238.22:11211"/>
+	</bean>
+	
+	<bean id="passiveDynaCache" class="vn.onepay.cache.dynacache.PassiveDynaMemoryCache">
+		<property name="cacheSize" value="50000"/>
+		<property name="memCachedManager" ref="memCachedManager"/>
+	</bean>
+	<!-- ================= -->
+	
+	<bean id="httpCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpCacheItemFeedImpl"/>
+	<bean id="httpAsyncCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpCacheItemAsyncFeedImpl">
+		<property name="timeOut" value="5000"/>
+	</bean>
+	
+	<bean id="httpByteCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpByteCacheItemFeedImpl"/>
+	<bean id="httpByteAsyncCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpByteCacheItemAsyncFeedImpl">
+		<property name="timeOut" value="10000"/>
+	</bean>
+
+	<!-- Some feeder no need caching -->
+	<bean id="httpFeeder" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpCacheItemFeed"/>
+		<property name="cacheSize" value="0"/>
+		<property name="timeToLive" value="0"/>
+	</bean>
+	
+	<!-- Cache declare -->
+	<bean id="httpDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+	<bean id="httpAsyncDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpAsyncCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+	<bean id="httpByteDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpByteCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+	<bean id="httpByteAsyncDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpByteAsyncCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+</beans>

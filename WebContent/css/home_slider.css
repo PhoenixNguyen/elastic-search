@@ -1,0 +1,151 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+/*--------- BANNER SLIDER --------------*/
+
+#hot_productslides
+{
+	width: 550px;
+	height: 370px;
+	position: relative;
+}
+
+#hot_productslides .next {
+	position:absolute;
+	right: 0px;
+	bottom: 0px;
+	width:40px;
+	height: 350px;
+	display:block;
+	z-index:889;
+}
+
+#hot_productslides .next:hover {
+	position:absolute;
+	right: 0px;
+	bottom: 0px;
+	width:40px;
+	height: 350px;
+	display:block;
+	z-index:889;
+}
+
+#hot_productslides .prev {
+	position: absolute;
+	left: 12px;
+	bottom: 0px;
+	width: 40px;
+	height: 350px;
+	display: block;
+	z-index: 888;
+}
+
+#hot_productslides .prev:hover {
+	position:absolute;
+	left: 0px;
+	bottom: 0px;
+	width:40px;
+	height: 350px;
+	display:block;
+	z-index:888;
+}
+
+
+.slides_container {
+	width: 550px;
+	height: 350px;
+	overflow:hidden;
+}
+
+.slides_container img{
+	border: 0px solid #cecece;
+}
+
+.round_img_tl
+{
+	width: 8px;
+	height: 8px;
+	background: url(../images/round_img_tl.png) no-repeat;
+	_background: none;
+	top: 0px;
+	left: 0px;
+	position: absolute;
+	z-index:109;
+}
+
+.round_img_tr
+{
+	width: 8px;
+	height: 8px;
+	background: url(../images/round_img_tr.png) no-repeat;
+	top: 0px;
+	right: 0px;
+	position: absolute;
+	z-index:110;
+	_background: none;
+}
+.pagination {
+	margin: 0px;
+	padding: 0px;
+	position: absolute;
+	bottom: 15px;
+	left: 240px;
+	z-index: 999;
+	list-style: none;
+}
+
+.pagination li {
+	float:left;
+	margin:0 1px;
+}
+
+.pagination li a {
+	display:block;
+	width:10px;
+	line-height:10px;
+	color: #000;
+	background: url(../images/slide_dot.png) no-repeat 0px -10px;
+	float:left;
+	margin-right: 4px;
+	overflow:hidden;
+	text-align: center;
+	font-weight: bold;
+	font-family: arial;
+	text-indent: 100px;
+}
+
+.pagination li.current a {
+	background: #333;
+	margin-right:4px;
+	color: #fff;
+	text-indent: 100px;
+	background: url(../images/slide_dot.png) no-repeat 0px 0px;
+	
+}
+
+.pagination li a:hover {
+	display:block;
+	width:10px;
+	line-height:10px;
+	color: #000;
+	background: url(../images/slide_dot.png) no-repeat 0px 0px;
+	float:left;
+	margin-right: 4px;
+	overflow:hidden;
+	text-align: center;
+	font-weight: bold;
+	text-decoration: none;
+	font-family: arial;
+	text-indent: 100px;
+}
+
+.pagination li.current a:hover {
+	background: url(../images/slide_dot.png) no-repeat -10px 0px;
+	margin-right:4px;
+	color: #fff;
+	text-decoration: none;
+	text-indent: 100px;
+}
+
+

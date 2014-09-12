@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/cache 
+        http://www.springframework.org/schema/cache/spring-cache.xsd">
+	
+	<!-- Jedis Pool Configuration -->
+	<!-- Default value 
+	[maxActive]:8
+	[maxIdle]:8
+	[maxWait]:-1
+	[minEvictableIdleTimeMillis]:60000
+	[minIdle]:0
+	[numTestsPerEvictionRun]:-1
+	[softMinEvictableIdleTimeMillis]:-1
+	[timeBetweenEvictionRunsMillis]:30000
+	[whenExhaustedAction]:1 
+	-->
+		
+	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig"
+		p:maxActive="2" p:maxIdle="2" />
+
+	<!-- Jedis ConnectionFactory -->
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:host-name="123.30.238.22" p:port="6379" p:use-pool="true"
+		p:pool-config-ref="poolConfig" />
+
+	<!-- redis template definition -->
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory" />
+
+	<!-- declare Redis Cache Manager -->
+	<!-- <bean id="cacheManager" class="org.springframework.data.redis.cache.RedisCacheManager" 
+		c:template-ref="redisTemplate"> </bean> -->
+
+	<bean id="passiveDynaCache" class="vn.onepay.cache.dynacache.PassiveRedisMemoryCache"
+		p:redis-template-ref="redisTemplate">
+	</bean>
+	
+	<!-- ================= -->
+	
+	<bean id="httpCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpCacheItemFeedImpl"/>
+	<bean id="httpAsyncCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpCacheItemAsyncFeedImpl">
+		<property name="timeOut" value="5000"/>
+	</bean>
+	
+	<bean id="httpByteCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpByteCacheItemFeedImpl"/>
+	<bean id="httpByteAsyncCacheItemFeed" class="vn.onepay.cache.dynacache.impl.HttpByteCacheItemAsyncFeedImpl">
+		<property name="timeOut" value="10000"/>
+	</bean>
+
+	<!-- Some feeder no need caching -->
+	<bean id="httpFeeder" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpCacheItemFeed"/>
+		<property name="cacheSize" value="0"/>
+		<property name="timeToLive" value="0"/>
+	</bean>
+	
+	<!-- Cache declare -->
+	<bean id="httpDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+	<bean id="httpAsyncDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpAsyncCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+	<bean id="httpByteDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpByteCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+	<bean id="httpByteAsyncDynaCache" class="vn.onepay.cache.dynacache.DynaHashTableCache">
+		<property name="feeder" ref="httpByteAsyncCacheItemFeed"/>
+		<property name="cacheSize" value="1000"/>
+		<property name="timeToLive" value="300000"/>
+	</bean>
+	
+</beans>

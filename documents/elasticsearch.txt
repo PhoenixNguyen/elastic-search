@@ -1,0 +1,1 @@
+./bin/elasticsearch --cluster.name 1pay_search --node.name 1pay_search

@@ -1,0 +1,5 @@
+sudo ufw enable 
+sudo ufw status
+sudo ufw allow from any to any port 9200
+sudo ufw allow from any to any port 9300
+sudo ufw status

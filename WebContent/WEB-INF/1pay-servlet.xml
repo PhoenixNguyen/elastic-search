@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="524288000" />
+    </bean>
+	<bean name="/abstract.html" class="vn.onepay.web.controllers.AbstractController" abstract="true">
+		<property name="accountDAO" ref="accountDAO" />
+	</bean>
+	<bean name="/abstractForm.html" class="vn.onepay.web.controllers.AbstractFormController" abstract="true">
+		<property name="accountDAO" ref="accountDAO" />
+	</bean>
+	
+	<bean name="/protected/abstract.html" class="vn.onepay.web.secure.controllers.AbstractProtectedController" abstract="true">
+		<property name="accountDAO" ref="accountDAO" />
+	</bean>
+	<bean name="/protected/abstractForm.html" class="vn.onepay.web.secure.controllers.AbstractProtectedFormController" abstract="true">
+		<property name="accountDAO" ref="accountDAO" />
+	</bean>
+	<!-- Captcha -->
+	<bean name="/captcha.html" class="vn.onepay.web.controllers.CaptchaImageGeneratorController" parent ="/abstract.html">
+	</bean>
+	<bean id="jcaptchaValidator" class="vn.onepay.web.validator.JCaptchaValidator">
+	</bean>
+	<!-- /Captcha -->
+	<!-- =============================== -->
+	<bean name="/login.html" class="vn.onepay.web.controllers.LoginController" parent ="/abstractForm.html">
+        <property name="sessionForm" value="true" />
+        <property name="commandName" value="login" />
+        <property name="commandClass" value="vn.onepay.web.models.LoginForm" />
+        <property name="validator">
+            <bean class="vn.onepay.web.validator.LoginValidator">
+            </bean>
+        </property>
+        <property name="formView" value="login" />
+    </bean>
+    <bean name="/logout.html" class="vn.onepay.web.controllers.LogoutController" parent ="/abstract.html"/>
+    
+    <bean name="/otp-auth.html" class="vn.onepay.web.controllers.OTPAuthenticationController" parent ="/abstractForm.html">
+        <property name="sessionForm" value="true" />
+        <property name="commandName" value="otpAuth" />
+        <property name="commandClass" value="vn.onepay.web.models.OTPAuthenticationForm" />
+        <property name="validator">
+            <bean class="vn.onepay.web.validator.OTPAuthenticationValidator">
+            </bean>
+        </property>
+        <property name="formView" value="otp_auth" />
+    </bean>
+    
+    <bean name="/index.html" class="vn.onepay.web.controllers.IndexController" parent ="/abstract.html">
+		<property name="webView" value="index"/>
+	</bean>
+	
+    <bean name="/protected/home.html" class="vn.onepay.web.secure.controllers.HomeController" parent ="/protected/abstract.html">
+    	<property name="webView" value="home"/>
+	</bean>
+	
+	<bean name="/protected/card-report.html" class="vn.onepay.web.secure.controllers.CardCdrReportController" parent ="/protected/abstract.html">
+		<property name="webView" value="card_report"/>
+		<property name="cardCdrDAO" ref="cardCdrDAO" />
+		<property name="cardCdrElasticSearch" ref="cardCdrElasticSearch"/>
+		<property name="limit" value="20"/>
+	</bean>
+	
+	<bean id="cardCdrElasticSearch" class="vn.onepay.search.CardCdrElasticSearch">
+		<property name="cardCdrService" ref="cardCdrService" />
+		<property name="elasticsearchTemplate" ref="elasticsearchTemplate" />
+	</bean>
+	
+	<bean name="/protected/card-report-elastic.html" class="vn.onepay.search.controller.CardCdrReportController" parent ="/protected/abstract.html">
+		<property name="webView" value="card_report_elastic"/>
+		<property name="cardCdrElasticSearch" ref="cardCdrElasticSearch"/>
+		<property name="limit" value="20"/>
+	</bean>
+   <!--
+    ********************************************************************
+    -->
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+          p:prefix="/layouts/web/"
+          p:suffix=".jsp" />
+</beans>
