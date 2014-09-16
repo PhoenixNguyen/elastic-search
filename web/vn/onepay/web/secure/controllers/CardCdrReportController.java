@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,6 +57,7 @@ public void setCardCdrDAO(CardCdrDAO cardCdrDAO)
   protected ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response, ModelMap model)
     throws Exception
   {
+	  Date start = new Date();
     try
     {
       String chargingService = "CARD";
@@ -166,10 +168,28 @@ public void setCardCdrDAO(CardCdrDAO cardCdrDAO)
 
       model.put("sumary", sumary); System.out.println(sumary);
       
+      //Clone
+//      List<CardCdr> cardCdrAll = new ArrayList<CardCdr>();
+//      List<CardCdr> cardCdrList = cardCdrDAO.findCardCdr(account, null, "", "", "", null, null, "", null, null, null, null, 0, 0);
+//      for(int i = 0; i < 5; i ++){
+//    	  int j = 0;
+//    	  for(CardCdr car : cardCdrList){
+//    		  car.setId("99"+i +""+ j++ + car.getId());
+//    		  
+//    		  cardCdrAll.add(car);
+//    	  }
+//    	  
+//      }
+//      cardCdrDAO.save(cardCdrAll);
+      
+      
+      //cardCdrElasticSearch.deleteIndex();
+      
       //INDEX
       if(!cardCdrElasticSearch.checkExist() ){
     	  System.out.println("Dang danh chi muc ...");
-    	  List<CardCdr> cardCdrList = cardCdrDAO.findCardCdr(account, null, "", "", "", null, null, "", null, null, null, null, 0, 0);
+    	  //cardCdrElasticSearch.deleteIndex();
+    	  List<CardCdr> cardCdrList = cardCdrDAO.findCardCdr(account, null, "", "", "", null, null, "", null, null, null, null, 0, 0 );
     	  cardCdrElasticSearch.index(cardCdrList);
       }
       else{
@@ -182,6 +202,13 @@ public void setCardCdrDAO(CardCdrDAO cardCdrDAO)
     catch (Exception e) {
       e.printStackTrace();
     }
+    
+    Date end = new Date();
+    Long duration = end.getTime() - start.getTime();
+    Long timeHandleTotal = TimeUnit.MILLISECONDS.toMillis(duration);
+    
+    model.put("timeHandleTotal", timeHandleTotal);
+    
     return (ModelAndView)(ModelAndView)new ModelAndView(getWebView(), "model", model);
   }
 

@@ -285,7 +285,9 @@ $(function(){
 							<div class="srv_row">
 								<script>var rownum = 1;</script>
 								<c:if test="${model.total > 0}">
-									<span class="pagebanner"> ${model.total} kết quả tìm thấy, hiển thị từ ${model.offset + 1  } tới ${(model.offset + model.pagesize) > model.total ? model.total : (model.offset + model.pagesize) }. </span>
+									<span class="pagebanner"> ${model.total} kết quả tìm thấy, hiển thị từ ${model.offset + 1  } tới ${(model.offset + model.pagesize) > model.total ? model.total : (model.offset + model.pagesize) }. 
+										&nbsp(Tổng thời gian tìm kiếm ${model.timeHandleTotal /1000.0} giây)
+									</span>
 								</c:if>
 								<br/>
 								

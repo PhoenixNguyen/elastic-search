@@ -64,10 +64,15 @@ public class CardCdrElasticSearch {
 		
 	}
 	
+	public boolean deleteIndex(){
+			
+			if(elasticsearchTemplate.indexExists(vn.onepay.search.entities.CardCdr.class))
+				return elasticsearchTemplate.deleteIndex(vn.onepay.search.entities.CardCdr.class);
+			return false;
+	}
+
 	public boolean checkExist(){
 		
-//		if(elasticsearchTemplate.indexExists(vn.onepay.search.entities.CardCdr.class))
-//			elasticsearchTemplate.deleteIndex(vn.onepay.search.entities.CardCdr.class);
 		return elasticsearchTemplate.indexExists(vn.onepay.search.entities.CardCdr.class);
 	}
 	

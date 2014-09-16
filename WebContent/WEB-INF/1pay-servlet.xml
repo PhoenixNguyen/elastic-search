@@ -81,6 +81,20 @@
 		<property name="cardCdrElasticSearch" ref="cardCdrElasticSearch"/>
 		<property name="limit" value="20"/>
 	</bean>
+	
+	<!-- NEW -->
+	<bean id="elasticSearch" class="vn.onepay.search.elastic.impl.ElasticSearchImpl">
+		
+		<property name="elasticsearchTemplate" ref="elasticsearchTemplate" />
+	</bean>
+	
+	<bean name="/protected/card-charging.html" class="vn.onepay.search.controller.CardCdrController" parent ="/protected/abstract.html">
+		<property name="webView" value="card-charging"/>
+		<property name="elasticSearch" ref="elasticSearch"/>
+		<property name="limit" value="20"/>
+	</bean>
+	
+	<!-- /NEW -->
    <!--
     ********************************************************************
     -->

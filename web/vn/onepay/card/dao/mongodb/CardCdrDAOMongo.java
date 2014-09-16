@@ -5,19 +5,23 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.GroupCommand;
 import com.mongodb.util.JSON;
+
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
+
 import org.apache.commons.lang.StringUtils;
 import org.json.JSONObject;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+
 import vn.onepay.account.model.Account;
 import vn.onepay.card.dao.CardCdrDAO;
 import vn.onepay.card.model.CardCdr;
@@ -30,7 +34,7 @@ public class CardCdrDAOMongo
   private MongoTemplate mongoTemplate;
   private String mongoCollection;
 
-  public void setMongoTemplate(MongoTemplate mongoTemplate)
+public void setMongoTemplate(MongoTemplate mongoTemplate)
   {
     this.mongoTemplate = mongoTemplate;
   }
@@ -251,4 +255,10 @@ public class CardCdrDAOMongo
     System.out.println(query.toString());
     return query;
   }
+
+@Override
+public void save(List<CardCdr> cardCdrs) {
+	mongoTemplate.insert(cardCdrs, CardCdr.class);
+	
+}
 }

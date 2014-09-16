@@ -37,7 +37,7 @@
 		<constructor-arg name="mongo" ref="mongo" />
 		<constructor-arg name="databaseName" value="onepay" />
 	</bean>
-
+	
 	<!-- Use this post processor to translate any MongoExceptions thrown in @Repository annotated classes -->
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<!--  -->

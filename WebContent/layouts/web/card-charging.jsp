@@ -80,88 +80,20 @@ $(function(){
 						<jsp:include page="include_personal_bar.jsp" />
 						<!-- Left Menu -->
 						<%request.setAttribute("cardReportElastic", true);%>
-						<jsp:include page="include_search_menu.jsp" />
+						<jsp:include page="card-charging-search-menu.jsp" />
 						
 						<div class="right_content">
 							<h1 class="srv_title">Tìm kiếm Card Charging</h1>
 							<div>
-								<form id="cardReport" name="cardReport" action="card-report-elastic.html" method="get">
+								<form id="cardReport" name="cardReport" action="card-charging.html" method="get">
 									
-									<c:if test="${param.provider != null && param.provider != ''  }">
-										<input type="hidden" name="provider" value="${param.provider }"/>
-									</c:if>
-									<c:if test="${param.type != null && param.type != ''  }">
-										<input type="hidden" name="type" value="${param.type }"/>
-									</c:if>
-									<c:if test="${param.amount != null && param.amount != ''  }">
-										<input type="hidden" name="amount" value="${param.amount }"/>
-									</c:if>
-									<c:if test="${param.status != null && param.status != ''  }">
-										<input type="hidden" name="status" value="${param.status }"/>
-									</c:if>
 									
-									<script type="text/javascript">
-										$(document).ready(function(){
-											$('.scope_search .provider').live('click', function(){
-												
-												var provider = $(this).attr('provider');
-												var providerChild = $('form[name=cardReport] input[name=provider]');
-												
-												if(typeof providerChild.val() === 'undefined'){
-													 $('form[name=cardReport]').append('<input type="hidden" name="provider" value="'+provider+'"/>');
-												}
-												
-												providerChild.val(provider);
-												
-												$('form[name=cardReport]').submit();
-											});
-											$('.scope_search .type').live('click', function(){
-												var type = $(this).attr('type');
-												var typeChild = $('form[name=cardReport] input[name=type]');
-												
-												if(typeof typeChild.val() === 'undefined'){
-													 $('form[name=cardReport]').append('<input type="hidden" name="type" value="'+type+'"/>');
-												}
-												
-												typeChild.val(type);
-												
-												$('form[name=cardReport]').submit();
-											});
-											$('.scope_search .amount').live('click', function(){
-												var amount = $(this).attr('amount');
-												var amountChild = $('form[name=cardReport] input[name=amount]');
-												
-												if(typeof amountChild.val() === 'undefined'){
-													 $('form[name=cardReport]').append('<input type="hidden" name="amount" value="'+amount+'"/>');
-												}
-												
-												amountChild.val(amount);
-												
-												$('form[name=cardReport]').submit();
-											});
-											$('.scope_search .status').live('click', function(){
-												var status = $(this).attr('status');
-												var statusChild = $('form[name=cardReport] input[name=status]');
-												
-												if(typeof statusChild.val() === 'undefined'){
-													 $('form[name=cardReport]').append('<input type="hidden" name="status" value="'+status+'"/>');
-												}
-												
-												statusChild.val(status);
-												
-												$('form[name=cardReport]').submit();
-											});
-											
-											//Delete filter
-											$('.scope_search .filter').live('click', function(){
-												var child = $(this).attr('filter');
-												
-												$('form[name=cardReport] input[name='+child+']').remove();
-												
-												$('form[name=cardReport]').submit();
-											});
-										});
-									</script>
+									<c:forEach items="${model.fieldMaps }" var="map">
+									
+										<c:if test="${param[map.key] != null && param[map.key] != ''  }">
+											<input type="hidden" name="${map.key }" value="${param[map.key] }"/>
+										</c:if>
+									</c:forEach>	
 									
 									<div id="filter">
 										<div class="filter_row">
@@ -169,7 +101,7 @@ $(function(){
 							                 	<table width="80%" align="center">
 							                 		<tr>
 							                 		
-							                 			<td width="70%"><input style="width: 97%" type="text" name="merchant" list="listForSearchMC"  maxlength="100" value="${param.merchant}" class="txt_filter" placeholder="Nhập tên merchant" /></td>
+							                 			<td width="70%"><input style="width: 97%" type="text" name="key" list="listForSearchMC"  maxlength="100" value="${param.key}" class="txt_filter" placeholder="Nhập từ khóa" /></td>
 							                 			<td width="30%" align="center"><input style="margin-top: 0px;"  class="btn_greensmall" type="submit" value="Tìm kiếm" /></td>
 							                 			
 							                 		</tr>
@@ -228,7 +160,7 @@ $(function(){
 								<script>var rownum = 1;</script>
 								<c:if test="${model.total > 0}">
 									<span class="pagebanner"> ${model.total} kết quả tìm thấy, hiển thị từ ${model.offset + 1  } tới ${(model.offset + model.pagesize) > model.total ? model.total : (model.offset + model.pagesize) }. 
-										&nbsp(Tổng thời gian tìm kiếm ${model.timeHandleTotal /1000.0} giây)
+										&nbsp(Thời gian tìm kiếm ${model.timeHandleTotal /1000.0} giây)
 									</span>
 								</c:if>
 								<br/>

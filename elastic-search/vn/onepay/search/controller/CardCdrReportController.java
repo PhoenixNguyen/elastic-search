@@ -1,10 +1,14 @@
 package vn.onepay.search.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.ehcache.util.TimeUtil;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.elasticsearch.core.facet.result.Term;
@@ -36,6 +40,9 @@ public class CardCdrReportController extends AbstractProtectedController{
 	@Override
 	protected ModelAndView handleRequest(HttpServletRequest request,
 			HttpServletResponse response, ModelMap model) throws Exception {
+		
+		Date start = new Date();
+		
 		Account account = (Account)request.getSession().getAttribute("account_logined");
 		
 		String paymentProvider = StringUtils.trimToEmpty(request.getParameter("provider"));
@@ -106,7 +113,13 @@ public class CardCdrReportController extends AbstractProtectedController{
 	      
 	      model.put("total", count);
 	      
-	      return (ModelAndView)(ModelAndView)new ModelAndView(getWebView(), "model", model);
+	      Date end = new Date();
+	      Long duration = end.getTime() - start.getTime();
+	      Long timeHandleTotal = TimeUnit.MILLISECONDS.toMillis(duration);
+	      
+	      model.put("timeHandleTotal", timeHandleTotal);
+	      
+	      return new ModelAndView(getWebView(), "model", model);
 	}
 	
 }

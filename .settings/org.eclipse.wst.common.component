@@ -11,6 +11,7 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/web"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/billing"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/elastic-interface"/>
         <property name="java-output-path" value="/1pay_search/build/classes"/>
         <property name="context-root" value="1paySearch"/>
     </wb-module>
