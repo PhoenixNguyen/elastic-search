@@ -166,7 +166,7 @@ $(function(){
 								<br/>
 								
 								<display:table name="model.list" id="list" 
-												requestURI="card-report-elastic.html" 
+												requestURI="card-charging.html" 
 												pagesize="${model.pagesize}" partialList="true" size="model.total"
 												style="width:100%;cellspacing:0;cellpadding:0;border: 1px solid #CCC;table-layout:fixed;" 
 												sort="list">
@@ -183,7 +183,7 @@ $(function(){
 								    </display:column>
 								    <%} %>
 								    <display:column title="Merchant" headerClass="transhead" class="transdata" property="merchant" style="border: 1px solid #CCC;" />
-								    <display:column title="Timestamp" headerClass="transhead" class="transdata" property="timestamp" format="{0,date,yyyy-MM-dd HH:mm:ss}" style="border: 1px solid #CCC;" />
+								    <display:column title="Timestamp" headerClass="transhead" class="transdata" property="timestamp" format="{0,date,dd/MM/yyyy HH:mm:ss}" style="border: 1px solid #CCC;" />
 								    <display:column title="Card Type" headerClass="transhead" class="transdata" property="type" style="border: 1px solid #CCC;" />
 								    <display:column title="Serial" headerClass="transhead" class="transdata" property="serial" style="border: 1px solid #CCC;" />
 								    <display:column title="Amount" headerClass="transhead" class="transdata" property="amount" style="border: 1px solid #CCC;text-align:right;" format="{0,number,0,000} đ" />

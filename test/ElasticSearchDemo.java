@@ -1,4 +1,3 @@
-package vn.onepay.search;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 
@@ -18,9 +17,8 @@ import org.springframework.data.elasticsearch.core.facet.result.TermResult;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.elasticsearch.core.query.SearchQuery;
-
-import vn.onepay.search.entities.Article;
-import vn.onepay.search.entities.ArticleBuilder;
+import org.springframework.data.elasticsearch.entities.Article;
+import org.springframework.data.elasticsearch.entities.ArticleBuilder;
 
 public class ElasticSearchDemo {
 	public static final String RIZWAN_IDREES = "Rizwan Idrees";
@@ -34,7 +32,7 @@ public class ElasticSearchDemo {
 	public static void main(String[] args) {
 		
 		try{
-			ApplicationContext ctx = new ClassPathXmlApplicationContext("/vn/onepay/search/elasticsearch-context.xml");
+			ApplicationContext ctx = new ClassPathXmlApplicationContext("/springContext-test.xml");
 			ElasticsearchTemplate elasticsearchTemplate = (ElasticsearchTemplate) ctx.getBean("elasticsearchTemplate");
 			
 			elasticsearchTemplate.deleteIndex(Article.class);
@@ -53,6 +51,7 @@ public class ElasticSearchDemo {
 	        elasticsearchTemplate.index(article4);
 	        elasticsearchTemplate.refresh(Article.class, true);
 	        
+	        System.out.println("Indexing ...");
 	        // test
 	        shouldReturnFacetedAuthorsForGivenQueryWithDefaultOrder(elasticsearchTemplate);
 	        
@@ -117,7 +116,8 @@ public class ElasticSearchDemo {
 			// given
 	        String facetName = "fauthors";//fauthors
 	        SearchQuery searchQuery = new NativeSearchQueryBuilder().withQuery(matchAllQuery())
-	        		.withFilter(FilterBuilders.andFilter(FilterBuilders.termFilter("title", "four"), FilterBuilders.termFilter("publishedYears", YEAR_2000)))
+	        		//.withFilter(FilterBuilders.andFilter(FilterBuilders.termFilter("title", "four"), FilterBuilders.termFilter("publishedYears", YEAR_2000)))
+	        		.withFilter(FilterBuilders.regexpFilter("title*", "four 45 ghh"))
 	        		.withFacet(new TermFacetRequestBuilder(facetName).applyQueryFilter().fields("authors.untouched").ascCount().build()).build();//.untouched
 	        // when
 	        

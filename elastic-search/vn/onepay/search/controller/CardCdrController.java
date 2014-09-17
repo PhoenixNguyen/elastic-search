@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.map.LinkedMap;
 import org.apache.commons.lang.StringUtils;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.elasticsearch.core.facet.result.Term;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +42,7 @@ public class CardCdrController extends AbstractProtectedController{
 		
 		String key = StringUtils.trimToEmpty(request.getParameter("key"));
 		
+		//(*)
 		@SuppressWarnings("unchecked")
 		Map<String , String> fieldMaps = new LinkedMap();
 		fieldMaps.put("paymentProvider", "Nhà cung cấp");
@@ -49,6 +51,7 @@ public class CardCdrController extends AbstractProtectedController{
 		fieldMaps.put("status", "Trạng thái");
 		model.put("fieldMaps", fieldMaps);
 		
+		//(*)
 		List<String> fields = new ArrayList<String>();
 		fields.add("paymentProvider");
 		fields.add("type");
@@ -63,24 +66,22 @@ public class CardCdrController extends AbstractProtectedController{
 			terms.add(param);
 		}
 		
+		//(*)
 		List<List<Term>> termLists = new ArrayList<List<Term>>();
-		List<Term> providerFacets = new ArrayList<Term>();
-	    List<Term> typeFacets = new ArrayList<Term>();
-	    List<Term> amountFacets = new ArrayList<Term>();
-	    List<Term> statusFacets = new ArrayList<Term>();
 	    
-	    //TRUE Sequence with fields AND fieldMaps
-	    termLists.add(providerFacets);
-	    termLists.add(typeFacets);
-	    termLists.add(amountFacets);
-	    termLists.add(statusFacets);
-	    
+	    //(*)
 	    @SuppressWarnings("unchecked")
 		Map<String , String> keywords = new LinkedMap();
 	    if(!key.equals("")){
 	    	keywords.put("merchant", key);
 	    	keywords.put("type", key);
 	    }
+	    
+	    //(*)
+	    @SuppressWarnings("unchecked")
+		Map<String , SortOrder> sorts = new LinkedMap();
+	    sorts.put("timestamp", SortOrder.DESC);
+	    sorts.put("amount", SortOrder.ASC);
 	    
 		int offset = 0;
 		int page = 0;
@@ -96,8 +97,9 @@ public class CardCdrController extends AbstractProtectedController{
 	      int count = 0;
 	      
 	      if(elasticSearch.checkIndex(vn.onepay.search.entities.CardCdr.class)){
-	    	    count = elasticSearch.getFacets(fields, terms, termLists, keywords, vn.onepay.search.entities.CardCdr.class);
-				cardCdrList = elasticSearch.search(fields, terms, keywords, page, limit, vn.onepay.search.entities.CardCdr.class);
+	    	    count = elasticSearch.count(fields, terms, keywords, vn.onepay.search.entities.CardCdr.class);
+	    	    termLists = elasticSearch.getFacets(fields, terms, keywords, vn.onepay.search.entities.CardCdr.class);
+				cardCdrList = elasticSearch.search(fields, terms, keywords, sorts, page, limit, vn.onepay.search.entities.CardCdr.class);
 				
 				
 	      }
@@ -106,13 +108,15 @@ public class CardCdrController extends AbstractProtectedController{
 	    
 		model.put("total", count);
 		
+		//(*)
 		//push to layout
 		@SuppressWarnings("unchecked")
 		Map<String , List<Term>> facetsMap = new LinkedMap();
 		int k = 0;
 		for(String field : fieldMaps.keySet()){
 			
-			facetsMap.put(field, termLists.get(k));
+			if(termLists.size() > k)
+				facetsMap.put(field, termLists.get(k));
 			
 			k++;
 		}

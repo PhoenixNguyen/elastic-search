@@ -22,7 +22,7 @@
 			/WEB-INF/dynacache-application-context.xml,
 			/WEB-INF/mongo-config.xml,
 			/WEB-INF/provider-profile-context.xml,
-			classpath:vn/onepay/search/resources/card-cdr-service.xml
+			classpath:vn/onepay/search/resources/elastic-config.xml
 		</param-value>
 	</context-param>
 	<filter>

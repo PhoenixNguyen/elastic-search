@@ -14,10 +14,6 @@
 
     <context:component-scan base-package="vn.onepay.search.repositories" />
 
-    <bean id="cardCdrService" class="vn.onepay.search.service.CardCdrService" scope="prototype" >
-       <property name="cardCdrRepository" ref="cardCdrRepository"></property>
-    </bean>
-     
     <elasticsearch:transport-client id="client" cluster-name="elasticsearch" cluster-nodes="localhost:9300"/>
     <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
         <constructor-arg name="client" ref="client"/>

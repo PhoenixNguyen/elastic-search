@@ -25,7 +25,7 @@ import vn.onepay.billing.service.ProviderProfileManager;
 import vn.onepay.card.dao.CardCdrDAO;
 import vn.onepay.card.model.CardCdr;
 import vn.onepay.common.SharedConstants;
-import vn.onepay.search.CardCdrElasticSearch;
+import vn.onepay.search.elastic.ElasticSearch;
 import vn.onepay.service.ServiceFinder;
 import vn.onepay.utils.Utils;
 
@@ -35,14 +35,13 @@ public class CardCdrReportController extends AbstractProtectedController
   private int limit;
   private static DateFormat dtFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-    CardCdrElasticSearch cardCdrElasticSearch;
-	
-	public CardCdrElasticSearch getCardCdrElasticSearch() {
-		return cardCdrElasticSearch;
+	public ElasticSearch elasticSearch;
+	public ElasticSearch getElasticSearch() {
+		return elasticSearch;
 	}
-
-	public void setCardCdrElasticSearch(CardCdrElasticSearch cardCdrElasticSearch) {
-		this.cardCdrElasticSearch = cardCdrElasticSearch;
+	
+	public void setElasticSearch(ElasticSearch elasticSearch) {
+		this.elasticSearch = elasticSearch;
 	}
 
 public void setCardCdrDAO(CardCdrDAO cardCdrDAO)
@@ -183,14 +182,23 @@ public void setCardCdrDAO(CardCdrDAO cardCdrDAO)
 //      cardCdrDAO.save(cardCdrAll);
       
       
-      //cardCdrElasticSearch.deleteIndex();
-      
+      //elasticSearch.deleteIndex(vn.onepay.search.entities.CardCdr.class);
       //INDEX
-      if(!cardCdrElasticSearch.checkExist() ){
+      if(!elasticSearch.checkIndex(vn.onepay.search.entities.CardCdr.class) ){
     	  System.out.println("Dang danh chi muc ...");
     	  //cardCdrElasticSearch.deleteIndex();
     	  List<CardCdr> cardCdrList = cardCdrDAO.findCardCdr(account, null, "", "", "", null, null, "", null, null, null, null, 0, 0 );
-    	  cardCdrElasticSearch.index(cardCdrList);
+    	  
+    	  List<vn.onepay.search.entities.CardCdr> objList = new ArrayList<vn.onepay.search.entities.CardCdr>();
+    	  List<String> ids = new ArrayList<String>();
+    	  for(CardCdr card : cardCdrList){
+    		  ids.add(card.getId());
+    		  objList.add(new vn.onepay.search.entities.CardCdr(card.getId(), card.getAmount(), card.getMerchant(), card.getPaymentProvider(),
+    				  card.getApp_code(), card.getPin(), card.getSerial(), card.getType(), 
+    				  card.getStatus(), card.getMessage(), card.getTimestamp(), card.getExtractStatus()));
+    		  
+    	  }
+    	  elasticSearch.bulkIndex(ids, objList);
       }
       else{
     	  System.out.println("Da ton tai chi muc");

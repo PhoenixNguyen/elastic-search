@@ -6,9 +6,8 @@
 		<li><a href="#" class="tool_normal">Công cụ</a>
 			<ul>
 				<li><a href="<%=request.getContextPath()%>/protected/card-report.html" class="${cardReport?'slc_link':''}">Tra cứu</a></li>
-				<li><a href="<%=request.getContextPath()%>/protected/card-report-elastic.html" class="${cardReportElastic?'slc_link':''}">Tra cứu (2)</a></li>
 				
-				<li><a href="<%=request.getContextPath()%>/protected/card-charging.html" class="${cardCharging?'slc_link':''}">Card Charging</a></li>
+				<li><a href="<%=request.getContextPath()%>/protected/card-charging.html" class="${cardCharging?'slc_link':''}">Card Charging (ES)</a></li>
 			</ul>
 		</li>
 	</ul>

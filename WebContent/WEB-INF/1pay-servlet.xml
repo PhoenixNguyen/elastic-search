@@ -67,18 +67,7 @@
 	<bean name="/protected/card-report.html" class="vn.onepay.web.secure.controllers.CardCdrReportController" parent ="/protected/abstract.html">
 		<property name="webView" value="card_report"/>
 		<property name="cardCdrDAO" ref="cardCdrDAO" />
-		<property name="cardCdrElasticSearch" ref="cardCdrElasticSearch"/>
-		<property name="limit" value="20"/>
-	</bean>
-	
-	<bean id="cardCdrElasticSearch" class="vn.onepay.search.CardCdrElasticSearch">
-		<property name="cardCdrService" ref="cardCdrService" />
-		<property name="elasticsearchTemplate" ref="elasticsearchTemplate" />
-	</bean>
-	
-	<bean name="/protected/card-report-elastic.html" class="vn.onepay.search.controller.CardCdrReportController" parent ="/protected/abstract.html">
-		<property name="webView" value="card_report_elastic"/>
-		<property name="cardCdrElasticSearch" ref="cardCdrElasticSearch"/>
+		<property name="elasticSearch" ref="elasticSearch"/>
 		<property name="limit" value="20"/>
 	</bean>
 	
